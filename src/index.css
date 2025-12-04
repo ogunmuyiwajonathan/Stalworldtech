@@ -1,68 +1,218 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
+@import "tw-animate-css";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@theme inline {
+  /* Color definitions */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+  
+  /* Font definitions */
+  --font-poppins: "Poppins", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+  --font-script: "Great Vibes", cursive;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+  /* Animation definitions - Fixed names */
+  --animate-fade-hero: fade-hero 25s linear infinite;
+  --animate-rotate: rotate 4s linear infinite;
+  --animate-bubble: bubble 7.5s linear infinite; /* CHANGED: singular 'bubble' */
+  --animate-slide-right: slide-right 20s linear infinite;
+  --animate-navbar-slide: navbar-slide 1.2s cubic-bezier(.77, 0, .18, 1) forwards;
+  
+  /* Hero slider animation */
+  @keyframes fade-hero {
+    0% { opacity: 0; transform: scale(1.02); }
+    4% { opacity: 1; transform: scale(1); }
+    20% { opacity: 1; transform: scale(1); }
+    24% { opacity: 0; transform: scale(1.02); }
+    100% { opacity: 0; }
   }
-  a:hover {
-    color: #747bff;
+
+  /* Rotating animation */
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
-  button {
-    background-color: #f9f9f9;
+
+  /* Bubble animation - FIXED: Updated timing */
+  @keyframes bubble {
+    0% { 
+      transform: translateY(0) scale(0.5); 
+      opacity: 0; 
+    }
+    10% { 
+      opacity: 1; 
+      transform: translateY(-10vh) scale(0.7);
+    }
+    50% { 
+      opacity: 1; 
+      transform: translateY(-45vh) scale(1);
+    }
+    90% { 
+      opacity: 0.8; 
+      transform: translateY(-80vh) scale(0.7);
+    }
+    100% { 
+      transform: translateY(-90vh) scale(0.5); 
+      opacity: 0; 
+    }
   }
+
+  /* Slide right animation */
+  @keyframes slide-right {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200vh); }
+  }
+
+  /* Navbar slide animation */
+  @keyframes navbar-slide {
+    from { right: -100vw; opacity: 0; }
+    to { right: 0; opacity: 1; }
+  }
+
+  /* Crossfade slider keyframes */
+  @keyframes fade-slider {
+    0%   { opacity: 0; transform: scale(1.3); }
+    6.666%  { opacity: 1; transform: scale(1); }
+    33.333% { opacity: 1; transform: scale(1); }
+    39.999% { opacity: 0; transform: scale(0.7); }
+    100% { opacity: 0; transform: scale(0.7); }
+  }
+}
+
+/* Custom animation classes - OUTSIDE @theme block */
+/* Hero fade animation */
+.animate-fade-hero {
+  animation: fade-hero 25s linear infinite both;
+}
+
+/* Crossfade slider */
+.animate-fade-slider {
+  animation: fade-slider 25s linear infinite both;
+}
+
+/* Pause animations on hover */
+.group:hover .animate-fade-hero,
+.group:hover .animate-fade-slider {
+  animation-play-state: paused;
+}
+
+/* Bubble animation class */
+.animate-bubble {
+  animation: bubble 7.5s linear infinite both;
+  opacity: 0; /* Hidden initially */
+  animation-fill-mode: both;
+}
+
+/* Bubble-specific styles */
+.bubble-style {
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(255, 255, 255, 0.3) 70%
+  );
+  box-shadow: 
+    inset 0 0 25px rgba(255, 255, 255, 0.6),
+    0 0 50px rgba(255, 255, 255, 0.4);
+}
+
+/* Layer utilities */
+@layer utilities {
+  /* Animation delays for hero/slider */
+  .delay-0 { animation-delay: 0s; }
+  .delay-5000 { animation-delay: 5s; }
+  .delay-10000 { animation-delay: 10s; }
+  .delay-15000 { animation-delay: 15s; }
+  .delay-20000 { animation-delay: 20s; }
+  
+  /* Bubble delays - exact from your original CSS */
+  .delay-2s { animation-delay: 2s; }
+  .delay-1s { animation-delay: 1s; }
+  .delay-3s { animation-delay: 3s; }
+  .delay-4-5s { animation-delay: 4.5s; }
+  .delay-2-5s { animation-delay: 2.5s; }
+  .delay-6s { animation-delay: 6s; }
+  .delay-7s { animation-delay: 7s; }
+  .delay-4s { animation-delay: 4s; }
+  
+  /* Animation states */
+  .animation-paused { animation-play-state: paused; }
+  .animation-running { animation-play-state: running; }
+  
+  /* Z-index utilities */
+  .z-bubble { z-index: 1; }
+  .z-content { z-index: 10; }
+  .z-overlay { z-index: 20; }
+}
+/* ---------------------------
+   Cyberpunk Scrollbar + Sidebar
+--------------------------- */
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 14px;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+::-webkit-scrollbar-track {
+  background: 
+    linear-gradient(90deg, rgba(196, 135, 31, 0.1) 0%, rgba(0, 84, 93, 0.1) 50%, rgba(196, 135, 31, 0.1) 100%),
+    radial-gradient(circle at 50% 0%, rgba(0, 170, 193, 0.2) 0%, transparent 50%);
+  border-radius: 0;
+  border: 1px solid rgba(196, 135, 31, 0.3);
+  box-shadow: inset 0 0 20px rgba(196, 135, 31, 0.1), 0 0 0 1px rgba(0, 170, 193, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(196, 135, 31, 0.9) 0%, rgba(0, 170, 193, 0.9) 50%, rgba(0, 84, 93, 0.9) 100%);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(196, 135, 31, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.2), 0 0 20px rgba(0, 170, 193, 0.3);
+  position: relative;
+}
+
+::-webkit-scrollbar-thumb::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: scanline 2s linear infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.9) 0%, rgba(0, 170, 193, 1) 50%, rgba(0, 116, 128, 0.9) 100%);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.7), inset 0 0 8px rgba(255, 255, 255, 0.3), 0 0 30px rgba(0, 170, 193, 0.5);
+}
+
+/* Sidebar Scroll Container */
+.sidebar-scroll {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(196, 135, 31, 0.9) rgba(0,0,0,0.3);
+  padding-right: 4px; /* Prevent content from hiding under scrollbar */
+}
+
+/* Optional: smooth hover effect for sidebar items */
+.sidebar-scroll .sidebar-item {
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-scroll .sidebar-item:hover {
+  transform: translateX(5px);
+  color: #00aac1;
 }
