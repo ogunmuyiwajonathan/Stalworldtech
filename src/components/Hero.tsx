@@ -6,7 +6,7 @@ const images = ["footre.png", "day.png", "mount.avif", "cloth2.jpeg", "sea.png"]
 
 export default function Hero() {
   return (
-    <div id="home" className="relative h-screen overflow-hidden flex items-center justify-center pt-[72px]">
+    <div id="home" className="relative bg-black h-screen overflow-hidden flex items-center justify-center pt-[72px]">
       {/* Background Slides */}
       <div className="absolute inset-0 pointer-events-none select-none">
         {images.map((src, index) => (
