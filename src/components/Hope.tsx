@@ -176,11 +176,11 @@ export default function Hope() {
       </section>
 
       {/* About Section */}
-      <section className="about-section py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white" id="about">
+      <section className="about-section  py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white" id="about">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative overflow-hidden rounded-xl shadow-xl">
-              <img src="leave.png" alt="Studio work" className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700" />
+              <img src="https://i.postimg.cc/FFwpTC64/leave.png" alt="Studio work" className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="about-text">
               <h2 className="text-3xl md:text-4xl font-bold text-[#c4871f] mb-6">About Us</h2>
@@ -201,7 +201,7 @@ export default function Hope() {
         <div className="container mx-auto px-4 md:px-8 max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Info */}
-            <div className="contact-info bg-gradient-to-br from-gray-900 h-[100vh] to-black text-white p-8 md:p-10 rounded-2xl shadow-2xl">
+            <div className="contact-info h-[90vh] bg-gradient-to-br from-gray-900 to-black text-white p-8 md:p-10 rounded-2xl shadow-2xl">
               <h2 className="text-3xl font-bold text-[#c4871f] mb-6 relative">Get In Touch
                 <span className="absolute bottom-0 left-0 w-16 h-1 bg-[#c4871f] mt-2" />
               </h2>

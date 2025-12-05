@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 // import logo from "@assets/generated_images/gold_metallic_abstract_logo_letter_g_or_s.png";
 import { Menu, X, Home, Palette, Tag, Award, Building, MapPin } from "lucide-react";
- 
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
- 
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -14,7 +14,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
- 
+
   const navLinks = [
     { name: "Home", href: "#home", icon: <Home className="w-4 h-4" /> },
     { name: "What we do", href: "#what-we-do", icon: <Palette className="w-4 h-4" /> },
@@ -23,7 +23,7 @@ export default function Navbar() {
     { name: "About", href: "#about", icon: <Building className="w-4 h-4" /> },
     { name: "Contact", href: "#contact", icon: <MapPin className="w-4 h-4" /> },
   ];
- 
+
   return (
     <header 
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 px-6 py-3 ${
@@ -31,11 +31,11 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-[1200px] mx-auto flex items-center justify-between">
-        <a href="/" className="flex items-center gap-3 text-[#d4af37] font-bold text-lg no-underline animate-navbar-slide">
-          <img src="1log.png" alt="Stalworld Logo" className="h-9 w-auto rounded-full" />
+        <a href="#" className="flex items-center gap-3 text-[#d4af37] font-bold text-lg no-underline animate-navbar-slide">
+          <img src="/1log.png" alt="Stalworld Logo" className="h-9 w-auto rounded-full" />
           Stalworld
         </a>
- 
+
         {/* Desktop Nav */}
         <nav className="hidden md:block">
           <ul className="flex items-center gap-4 list-none animate-navbar-slide" style={{ animationDelay: "0.1s" }}>
@@ -52,7 +52,7 @@ export default function Navbar() {
             ))}
           </ul>
         </nav>
- 
+
         {/* Mobile Menu Toggle */}
         <button 
           className="md:hidden text-white hover:text-[#d4af37] transition-colors"
@@ -61,7 +61,7 @@ export default function Navbar() {
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
- 
+
       {/* Mobile Nav */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl border-t border-white/10 p-4 animate-in slide-in-from-top-5">
