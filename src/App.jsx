@@ -3,8 +3,10 @@ import { Switch, Route } from "wouter";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import NoInternet from "./components/NoInternet";
+import NotFound from "./components/NotFound";
+
 function App() {
-    const [online, setOnline] = useState(navigator.onLine);
+  const [online, setOnline] = useState(navigator.onLine);
 
   useEffect(() => {
     const handleOnline = () => setOnline(true);
@@ -28,6 +30,9 @@ function App() {
       
       {/* The "/home" path shows the main website content */}
       <Route path="/home" component={Home} />
+      
+      {/* 404 page for all other routes */}
+      <Route component={NotFound} />
     </Switch>
   );
 }
